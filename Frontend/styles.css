@@ -1,7 +1,122 @@
-
+body {
+	background-color: #D3D3D3;
+}
 
 .HealthCheck {
 	color: red;
 	background: blue;
 }
 
+.CardHolder {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	padding: 1rem;
+}
+
+@keyframes dealCard {
+from {
+	opacity: 0;
+	transform: translateY(-20px);
+}
+to {
+	opacity: 1;
+	transform: translateY(0);
+}
+}
+
+.Card {
+	width:300px;
+	height: 400px;
+	border-radius: 10%;
+	background-color: white;
+	animation: dealCard 2s ease forwards;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	overflow: hidden;
+}
+
+.ImageOf {
+	background-image: url('pics/faker.png');
+	background-size: cover;
+	background-color: white;
+	/* border: 1px solid black; */
+	background-position: center;
+	position: absolute;  /* Change from fixed to absolute */
+	width: 50%;
+	height: 25%;
+	border-radius: 30%;
+	top: 20%;  /* Adjust these values */
+	left: 25%;
+	box-shadow: 
+		0 4px 8px rgba(0, 0, 0, 5),  /* regular shadow */
+		0 0 10px rgba(255, 255, 255, 0.8);  /* white glow */
+}
+
+.Divider {
+	border-bottom-right-radius: 10%;
+	background-size: cover;
+	background-position: center 30%;
+	background-image: url('pics/t1.png');
+	border-bottom-left-radius: 10%; 
+	background-color: white;
+	width: 100%;
+	height: 75%;
+	position: absolute;
+	bottom: 0;  /* This is good, keeps it at bottom */
+	left: 0;    /* Add this to ensure it starts from left edge */
+	clip-path: polygon(
+		0 20%,                /* Start point (left side, lower) */
+		100% 0%,             /* End point (right side, higher) */
+		100% 100%,           /* Bottom right */
+		0 100%               /* Bottom left */
+		);
+	transition: transform 0.3s ease-out;
+	transform-origin: left;
+}
+
+.Card:hover .Divider {
+	transform: translateX(100%)
+}
+
+.CardHeader {
+    /* Font family (you can list multiple as fallbacks) */
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;	
+    
+    /* Letter spacing */
+    letter-spacing: 1px;
+
+    text-align: center;
+}
+
+.CardStats {
+	width: 100%;
+	height: 60%;
+	position: absolute;
+	bottom: 0;
+}
+
+.StatsTable {
+
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px;
+    
+    /* Make the table take full dimensions */
+    width: 100%;
+    height: 100%;
+    
+    /* Center the table itself */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* Vertical center */
+    align-items: center;     /* Horizontal center */
+}
+
+.StatsTable td {
+    font-size: 16px;  /* Smaller font size just for table cells */
+    text-align: left;  /* Centers text horizontally in cells */
+    padding: 5px;
+    vertical-align: middle;  /* Centers text vertically in cells */
+}
