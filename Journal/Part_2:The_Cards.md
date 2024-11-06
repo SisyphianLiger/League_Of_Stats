@@ -14,7 +14,7 @@ So, the cards have within themselves dummy data, again, no DB no data. However y
 The end result of this chapter is cards that can spawn in by a JS function and then be interacted with from the user. 
 
 ### Example!
-![Current Demo](Pics/output3.gif)
+![Current Demo](Pics/outputcard3.gif)
 
 ## Testing 
 Ahh yes Testing in the Frontend...well for now, there is still no tests, I now have the card template for which I want to make cards with and find information. That stated, the next section will indeed have a filter bar where you can query how many players you want to view. For now, just trust me, the tests will come.
