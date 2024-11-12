@@ -13,5 +13,13 @@ build:
 	@cd Backend && go build -o $(TARGET)
 	@cd ..
 
+ci:
+	@cd Backend
+	@gosec ./...
+	@go fmt
+	@go test ./...
+	@staticcheck ./...
+	@cd ../
+
 live:
 	@live-server --port=8080 --entry-file=index.html

@@ -1,29 +1,41 @@
 package main
 
-
 import (
-	"net/http"
 	"log"
+	"net/http"
+
+	"github.com/SisyphianLiger/League_Of_Stats/internal/database"
 )
 
 // apiConfig Struct
-type apiConfig struct {}
+type apiConfig struct {
+	dbq *database.Queries
+}
 
-func main () {
+func main() {
 	const apiPath = "/api"
 	const port = "8081"
 
 	server := http.NewServeMux()
 
 	server.HandleFunc(apiPath+"/healthz", healthCheck)
-	
-	cfg := apiConfig{}
+
+	dbURL := environmentVarExists("DB_URL")
+
+	// Make DB Connection extracted
+	db := openDB("postgres", dbURL)
+	dbQueries := database.New(db)
+
+	cfg := apiConfig{
+		dbq: dbQueries,
+	}
 
 	handler := cfg.CorsMiddleware(server)
-	
+
 	localSever := &http.Server{
-		Handler: handler,
-		Addr:    ":" + port,
+		Handler:     handler,
+		Addr:        ":" + port,
+		ReadTimeout: 20,
 	}
 
 	log.Printf("Serving on port %s\n", port)
