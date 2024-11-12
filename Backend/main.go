@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/SisyphianLiger/League_Of_Stats/internal/database"
+	"github.com/SisyphianLiger/League_Of_Stats/internal/utils"
 )
 
 // apiConfig Struct
@@ -16,14 +17,15 @@ func main() {
 	const apiPath = "/api"
 	const port = "8081"
 
+	utils.LoadEnvFile(".env")
 	server := http.NewServeMux()
 
 	server.HandleFunc(apiPath+"/healthz", healthCheck)
 
-	dbURL := environmentVarExists("DB_URL")
+	dbURL := utils.EnvironmentVarExists("DB_URL")
 
 	// Make DB Connection extracted
-	db := openDB("postgres", dbURL)
+	db := utils.OpenDB("postgres", dbURL)
 	dbQueries := database.New(db)
 
 	cfg := apiConfig{
